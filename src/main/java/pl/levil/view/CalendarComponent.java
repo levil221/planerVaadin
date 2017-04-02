@@ -1,5 +1,6 @@
 package pl.levil.view;
 
+import com.sun.org.apache.regexp.internal.RE;
 import com.vaadin.ui.*;
 import pl.levil.model.Months;
 import pl.levil.model.Reservation;
@@ -25,6 +26,7 @@ public class CalendarComponent extends CustomComponent {
     //region fields
     private Calendar calendar = Calendar.getInstance();
     private Months currentMonth;
+    private List<Reservation> reservations;
     private List<Room> rooms;
     //endregion
 
@@ -90,7 +92,10 @@ public class CalendarComponent extends CustomComponent {
 
 
     private void getReservationsFromServer(Months month) {
-        CompletableFuture.supplyAsync(()-> DataProvaider.get().getAllReservations(month))
+        CompletableFuture.supplyAsync(()-> DataProvaider.get().getAllReservations(month)).thenAccept(this::applayReservations);
+    }
+    private void applayReservations(List<Reservation> reservations){
+        this.reservations = reservations;
     }
 
 }
