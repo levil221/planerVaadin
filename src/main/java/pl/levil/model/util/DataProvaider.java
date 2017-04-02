@@ -30,15 +30,15 @@ public class DataProvaider {
 
     //endregion
 
-    private WebTarget webTarget = ClientBuilder.newClient().target("http://0.0.0.0:8082");
+    private WebTarget webTarget = ClientBuilder.newClient().target("http://localhost:8082");
     //region Reservation API acces
     public List<Reservation> getAllReservations(){
         return webTarget.path("reservations/all").
                 request().
                 get(new GenericType<List<Reservation>>(){});
     }
-    public List<Reservation> getAllReservations(Date date){
-        return webTarget.path("reservations/"+date.toString()).
+    public List<Reservation> getAllReservations(int year, int month){
+        return webTarget.path("reservations/"+year+"/"+month).
                 request().
                 get(new GenericType<List<Reservation>>(){});
     }

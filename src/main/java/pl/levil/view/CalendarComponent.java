@@ -46,6 +46,7 @@ public class CalendarComponent extends CustomComponent {
         panel.addComponent(calendarGrid);
         makeCalendarGrid(currentMonth);
         setCompositionRoot(panel);
+        System.out.println(new Date());
     }
 
     private void makeCalendarGrid(Months month) {
@@ -66,7 +67,8 @@ public class CalendarComponent extends CustomComponent {
         }
 
         panel.replaceComponent(calendarGrid,newCalendarGrid);
-        calendarGrid = newCalendarGrid;
+        Date date = new Date();
+        getReservationsFromServer(date);
     }
 
     public void changeMonth(String month) {
@@ -91,8 +93,8 @@ public class CalendarComponent extends CustomComponent {
     }
 
 
-    private void getReservationsFromServer(Months month) {
-        CompletableFuture.supplyAsync(()-> DataProvaider.get().getAllReservations(month)).thenAccept(this::applayReservations);
+    private void getReservationsFromServer(Date date) {
+        CompletableFuture.supplyAsync(()-> DataProvaider.get().getAllReservations(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH))).thenAccept(this::applayReservations);
     }
     private void applayReservations(List<Reservation> reservations){
         this.reservations = reservations;

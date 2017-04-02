@@ -7,6 +7,8 @@
           <element id="module-output" name="vaadinPlaner" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: junit:junit:4.12" />
+          <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
           <element id="library" level="project" name="Maven: com.vaadin:vaadin-server:8.0.5" />
           <element id="library" level="project" name="Maven: com.vaadin:vaadin-sass-compiler:0.9.13" />
           <element id="library" level="project" name="Maven: org.w3c.css:sac:1.3" />
